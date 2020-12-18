@@ -1,35 +1,40 @@
+# 參數命名
+calories_quota = 1500
+
+
 import tkinter as tk
 
 
-class Application(tk.Frame):
-    def __init__(food, master):
-        tk.Frame.__init__(food, master)
-        food.grid()
-        food.createWidgets()
+class Page2(tk.Frame):
 
-    def createWidgets(food):
+    def __init__(self):
+        tk.Frame.__init__(self)
+        self.grid()
+        self.createWidgets()
 
-        food.label = tk.Label(food)
-        food.label["text"] = "本人今日熱量攝取上限為1500（待運算）"
-        food.label.grid(row=3, column=0, sticky=tk.N + tk.W)
+    def createWidgets(self):
 
-        food.optionList = ("全穀根莖類（碗）", "蔬菜類（碗）", "水果類（份）", "油脂與堅果種子類（茶匙）", "蛋豆魚肉類（份）", "奶類（杯）")
-        food.v = tk.StringVar()
-        food.v.set("食物類別")
-        food.optionmenu = tk.OptionMenu(food, food.v, *food.optionList)
-        food.optionmenu.grid(row=5, column=0, sticky=tk.N + tk.W)
+# 調整字體
+        import tkinter.font as tkFont
+        f1 = tkFont.Font(size = 16, family = "微軟正黑體")
 
-        food.spinbox = tk.Spinbox(food, from_=0, to=10, increment=0.5)
-        food.spinbox.grid(row=8, column=0, sticky=tk.N + tk.W)
+#  標題
+        self.Calories_quota_label = tk.Label(self, text = "本人今日熱量攝取上限為" + str(calories_quota) + "大卡", font = f1)
+        self.Calories_quota_label.grid(row = 0, column = 0)
 
-        food.text = tk.Text(food)
-        food.text["height"] = 10
-        food.text["width"] = 50
-        food.text.grid(row=9, column=0, sticky=tk.N + tk.W)
+# 食物類別選單
+        optionList = ("全穀根莖類（碗）", "蔬菜類（碗）", "水果類（份）", "油脂與堅果種子類（茶匙）", "蛋豆魚肉類（份）", "奶類（杯）")
+        option = tk.StringVar()
+        option.set("食物類別")
+        self.optionmenu = tk.OptionMenu(self, option, *optionList)
+        self.optionmenu.grid(row=1, column=0, sticky=tk.N + tk.W)
+        self.optionmenu.config(font = f1)
+
+# 單位選擇
+        self.spinbox = tk.Spinbox(self, from_=0, to=10, increment=0.5, font = f1)
+        self.spinbox.grid(row=2, column=0, sticky=tk.N + tk.W)
 
 
-
-
-root = tk.Tk()
-app = Application(root)
-root.mainloop()
+p2 = Page2()
+p2.master.title("page2")
+p2.mainloop()
